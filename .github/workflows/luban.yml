@@ -54,7 +54,7 @@ jobs:
         sed -i '3c FIRMWARE_BUILDS_REV=lissom' versions.inc     #更新版本
         sed -i '/INCLUDE/{s/=y/=n/}' .config                    #关闭所有INCLUDE
         sed -i '/LANG_CN/{s/=n/=y/}' .config                    #设置默认语言为中文
-        sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
+        #sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
         
         ######更新软件源码###############################################################################
         sed -i '1c SRC_NAME=openssl-1.1.1p' libs/libssl/Makefile                #更新openssl
@@ -70,13 +70,6 @@ jobs:
         
         ######默认扩展功能，注释以禁用####################################################################
         sed -i '/SFTP/{s/=n/=y/}' .config         #SFTP文件访问
-        
-        ########重新配置smartdns#########################################################################
-        cp -f $GITHUB_WORKSPACE/smartdns/Makefile  user/smartdns/Makefile
-        cp -f $GITHUB_WORKSPACE/smartdns/smartdns_custom.conf  user/smartdns/smartdns_custom.conf
-        sed -i '4c <title><#Web_Title#> - <#menu5_24#></title>' user/www/n56u_ribbon_fixed/Advanced_smartdns.asp
-        wget https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-smartdns.conf -O user/smartdns/ad.hosts
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config            #smartdns
         
         ######开始打包####################################################################################
         sudo ./build_firmware_modify $TNAME 0
