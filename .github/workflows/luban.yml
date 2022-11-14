@@ -54,11 +54,7 @@ jobs:
         sed -i '3c FIRMWARE_BUILDS_REV=lissom' versions.inc     #更新版本
         sed -i '/INCLUDE/{s/=y/=n/}' .config                    #关闭所有INCLUDE
         sed -i '/LANG_CN/{s/=n/=y/}' .config                    #设置默认语言为中文
-        #sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
-        
-        ######更新软件源码###############################################################################
-        sed -i '1c SRC_NAME=openssl-1.1.1p' libs/libssl/Makefile                #更新openssl
-        mv libs/libssl/openssl-1.1.1k.patch libs/libssl/openssl-1.1.1p.patch
+        sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
         
         ######恢复基础工具###############################################################################
         sed -i '/_OPENSS/{s/=n/=y/}' .config
