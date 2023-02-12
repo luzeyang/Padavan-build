@@ -84,6 +84,7 @@ jobs:
         sed -i '/sdns_enable/{s/0/1/}' user/shared/defaults.c
         
         ######开始打包####################################################################################
+        cp -f .config configs/templates/$TNAME.config
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
