@@ -60,7 +60,6 @@ jobs:
         sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
         sed -i '/INCLUDE_HTTPS/{s/=n/=y/}' .config              #开启HTTPS
         sed -i '/LANG_CN/{s/=n/=y/}' .config                    #设置默认语言为中文
-        sed -i '7c size_tmp="32M"' user/scripts/dev_init.sh     #调整/tmp分区为32MB
         echo "CONFIG_FIRMWARE_WEBUI_HIDE_VPN=y" >> .config      #Hidevpn
         echo "CONFIG_FIRMWARE_INCLUDE_SFE=y" >> .config
         
@@ -80,7 +79,6 @@ jobs:
         ########重新配置smartdns#########################################################################
         cp -f $GITHUB_WORKSPACE/smartdns/Makefile  user/smartdns/Makefile
         cp -f $GITHUB_WORKSPACE/smartdns/smartdns_custom.conf  user/smartdns/smartdns_custom.conf
-        sed -i '4c <title><#Web_Title#> - <#menu5_24#></title>' user/www/n56u_ribbon_fixed/Advanced_smartdns.asp
         wget https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-smartdns.conf -O user/smartdns/ad.hosts
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config            #smartdns
         sed -i '/sdns_enable/{s/0/1/}' user/shared/defaults.c
