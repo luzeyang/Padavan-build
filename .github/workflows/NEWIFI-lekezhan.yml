@@ -52,7 +52,7 @@ jobs:
         cp -f $GITHUB_WORKSPACE/banner         user/scripts/banner
         sed -i '/2011-2019/{s/2019/2023/}' user/www/Makefile    #过年好
         sed -i '2c FIRMWARE_BUILDS_VER=230102' versions.inc     #更新版本
-        sed -i '3c FIRMWARE_BUILDS_REV=jdyjd' versions.inc     #更新版本
+        sed -i '3c FIRMWARE_BUILDS_REV=lekezhan' versions.inc     #更新版本
         sed -i '/INCLUDE/{s/=y/=n/}' .config                    #关闭所有INCLUDE
         sed -i '/CONFIG_FIRMWARE_ENABLE/{s/=y/=n/}' .config     #关闭所有ENABLE
         sed -i '/ENABLE_FUSE/{s/=n/=y/}' .config                #开启FUSE
@@ -61,6 +61,8 @@ jobs:
         sed -i '/LANG_CN/{s/=n/=y/}' .config                    #设置默认语言为中文
         sed -i '7c size_tmp="32M"' user/scripts/dev_init.sh     #调整/tmp分区为32MB
         sed -i '898,899d' user/rc/net.c                         #修复ios访问bug
+        sed -i '/PDCN/{s/PDCN/LE/}' user/shared/defaults.h      #改WIFI
+        sed -i '/1234567890/{s/1234567890/lekezhan/}' user/shared/defaults.h    #改密码
         sed -i '/CONFIG_USB/{s/=y/=n/}'   configs/boards/NEWIFI-MINI/kernel-3.4.x.config
         sed -i '952c CONFIG_BLK_DEV_SD=n' configs/boards/NEWIFI-MINI/kernel-3.4.x.config
         echo "CONFIG_FIRMWARE_WEBUI_HIDE_VPN=y" >> .config      #Hidevpn
@@ -96,5 +98,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: NEWIFI-MINI-jdyjd
+        name: NEWIFI-MINI-lekezhan
         path: /opt/images
