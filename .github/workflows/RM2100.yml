@@ -59,8 +59,8 @@ jobs:
         
         ######更新软件源码###############################################################################
         sed -i '/htop-3.0.5/{s/3.0.5/3.0.2/}' user/htop/Makefile                #更新htop
-        sed -i '1c SRC_NAME=openssl-1.1.1s' libs/libssl/Makefile                #更新openssl
-        mv libs/libssl/openssl-1.1.1k.patch libs/libssl/openssl-1.1.1s.patch
+        sed -i '1c SRC_NAME=openssl-1.1.1w' libs/libssl/Makefile                #更新openssl
+        mv libs/libssl/openssl-1.1.1k.patch libs/libssl/openssl-1.1.1w.patch
         
         ######恢复基础工具###############################################################################
         sed -i '/_OPENSS/{s/=n/=y/}' .config
@@ -89,6 +89,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TAILSCALE=y" >> .config
         cp -f $GITHUB_WORKSPACE/autostart.sh        user/scripts/autostart.sh
         
+        #######配置wing##################################################################################
+        echo "CONFIG_FIRMWARE_INCLUDE_WING=y" >> .config
+        
         ######开始打包####################################################################################
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
@@ -96,5 +99,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: RM2100-kvr-smartdns
+        name: RM2100-kvr-smartdns-wing
         path: /opt/images
