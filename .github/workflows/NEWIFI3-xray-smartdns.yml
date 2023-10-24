@@ -24,8 +24,6 @@ jobs:
           cd /opt/rt-n56u/trunk
           sed -i '$a\export SSL_CERT_FILE=/usr/lib/cacert.pem' user/scripts/profile
           sed -i 's/size_etc="6M"/size_etc="16M"/' user/scripts/dev_init.sh
-          echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> configs/templates/NEWIFI3.config
-          echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> configs/templates/NEWIFI3.config
           sed -i '/INCLUDE/{s/=y/=n/}' configs/templates/NEWIFI3.config
           sed -i '/LANG_CN/{s/=n/=y/}' configs/templates/NEWIFI3.config
           sed -i '/ENABLE_IPV6/{s/=n/=y/}' configs/templates/NEWIFI3.config
@@ -36,6 +34,8 @@ jobs:
           sed -i '/IPSET/{s/=n/=y/}' configs/templates/NEWIFI3.config
           sed -i '/CURL/{s/=n/=y/}' configs/templates/NEWIFI3.config
           sed -i '/HTOP/{s/=n/=y/}' configs/templates/NEWIFI3.config
+          echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> configs/templates/NEWIFI3.config
+          echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> configs/templates/NEWIFI3.config
 
           # NEWIFI3
           fakeroot ./build_firmware_modify NEWIFI3
