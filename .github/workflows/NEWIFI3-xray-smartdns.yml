@@ -82,9 +82,11 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config            #smartdns
         
         #######添加tailscale#############################################################################
-        rm -rf user/xray
+        rm -rf user/xray/
         mkdir -p user/xray
-        wget -P user/xray/ https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/xray/Makefile
+        cp -f $GITHUB_WORKSPACE/xray/Makefile  user/xray/Makefile
+        cp -f $GITHUB_WORKSPACE/xray/xray  user/xray/xray
+        sed -i '163c dir_$(CONFIG_FIRMWARE_INCLUDE_XRAY)            += xray' user/Makefile
         echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config            #XRAY
         echo "CONFIG_FIRMWARE_INCLUDE_WING=y" >> .config            #WING
         ######开始打包####################################################################################
