@@ -92,7 +92,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config            #XRAY
         echo "CONFIG_FIRMWARE_INCLUDE_WING=y" >> .config            #WING
         ######开始打包####################################################################################
-        sudo ./build_firmware_modify $TNAME 0
+        cp -f .config configs/templates/$TNAME.config
+        fakeroot ./build_firmware_modify $TNAME
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
