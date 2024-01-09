@@ -92,6 +92,8 @@ jobs:
         
         #######配置wing##################################################################################
         echo "CONFIG_FIRMWARE_INCLUDE_WING=y" >> .config
+        echo " CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config
+        echo " CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config
         
         ######开始打包####################################################################################
         sudo ./build_firmware_modify $TNAME 0
