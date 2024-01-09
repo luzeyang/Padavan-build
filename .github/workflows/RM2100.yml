@@ -52,7 +52,7 @@ jobs:
         cp -f $GITHUB_WORKSPACE/asus_logo.png  user/www/n56u_ribbon_fixed/bootstrap/img/asus_logo.png   #替换logo
         cp -f $GITHUB_WORKSPACE/banner         user/scripts/banner
         sed -i '/2011-2019/{s/2019/2023/}' user/www/Makefile    #过年好
-        sed -i '3c FIRMWARE_BUILDS_REV=lissom' versions.inc     #更新版本
+        sed -i '3c FIRMWARE_BUILDS_REV=LuYao' versions.inc     #更新版本
         sed -i '/INCLUDE/{s/=y/=n/}' .config                    #关闭所有INCLUDE
         sed -i '/LANG_CN/{s/=n/=y/}' .config                    #设置默认语言为中文
         sed -i '/ENABLE_IPV6/{s/=n/=y/}' .config                #开启IPV6
@@ -92,7 +92,8 @@ jobs:
         
         #######配置wing##################################################################################
         echo "CONFIG_FIRMWARE_INCLUDE_WING=y" >> .config
-        echo " CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config
+        # echo " CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config
+        #######配置frps##################################################################################
         echo " CONFIG_FIRMWARE_INCLUDE_FRPS=y" >> .config
         
         ######开始打包####################################################################################
